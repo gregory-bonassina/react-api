@@ -20,8 +20,12 @@ export const Form = styled.form`
     border-radius: 4px;
     margin-top: 5px;
 
-    &::focus {
+    &:focus {
       border: 1px solid ${colors.primaryColor};
     }
+  }
+
+  button {
+    margin-top: 20px;
   }
 `;
