@@ -3,7 +3,7 @@ import { isEmail, isInt, isFloat } from 'validator';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaEdit, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -16,6 +16,8 @@ import * as actions from '../../store/modules/auth/actions';
 
 export default function Aluno({ match }) {
   const dispatch = useDispatch();
+
+  const activeUser = useSelector((state) => state.auth.user.id);
 
   const id = get(match, 'params.id', '');
   const [nome, setNome] = useState('');
@@ -34,7 +36,7 @@ export default function Aluno({ match }) {
       try {
         setIsLoading(true);
 
-        const { data } = await axios.get(`/alunos/${id}`);
+        const { data } = await axios.get(`/alunos/edit/${id}`);
         const Foto = get(data, 'Fotos[0].url', '');
 
         setNome(data.nome);
@@ -106,6 +108,7 @@ export default function Aluno({ match }) {
           idade,
           peso,
           altura,
+          user_id: activeUser,
         });
         toast.success('Aluno(a) editado(a) com sucesso');
       } else {
@@ -116,6 +119,7 @@ export default function Aluno({ match }) {
           idade,
           peso,
           altura,
+          user_id: activeUser,
         });
         toast.success('Aluno(a) criado(a) com sucesso');
       }

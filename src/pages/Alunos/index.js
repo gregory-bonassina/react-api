@@ -7,6 +7,7 @@ import {
   FaWindowClose,
   FaExclamation,
 } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 import { toast } from 'react-toastify';
 import { Container } from '../../styles/GlobalStyles';
@@ -16,19 +17,21 @@ import axios from '../../services/axios';
 import Loading from '../../components/Loading';
 
 export default function Alunos() {
+  const activeUserId = useSelector((state) => state.auth.user.id);
+
   const [alunos, setAlunos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   React.useEffect(() => {
     async function getData() {
       setIsLoading(true);
-      const response = await axios.get('/alunos');
+      const response = await axios.get(`/alunos/${activeUserId}`);
       setAlunos(response.data);
       setIsLoading(false);
     }
 
     getData();
-  }, []);
+  }, [activeUserId]);
 
   const handleDeleteAsk = (e) => {
     e.preventDefault();
