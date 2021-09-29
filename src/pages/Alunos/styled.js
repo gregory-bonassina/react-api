@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const AlunoContainer = styled.div`
   margin-top: 20px;
+  color: #fff;
 
   div {
     display: flex;

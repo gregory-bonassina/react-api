@@ -27,8 +27,11 @@ export default createGlobalStyle`
     color: #fff;
     padding: 10px 20px;
     border-radius: 4px;
-    font-weight: 700;
     transition: all 300ms;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
   }
 
   button:hover {
@@ -38,6 +41,8 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
     color: ${colors.primaryColor};
+    font-size: 14px;
+    font-weight: bold;
   }
 
   ul {
@@ -54,10 +59,22 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-  max-width: 480px;
-  background: #fff;
-  margin: 30px auto;
-  padding: 30px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+`;
+
+export const CenteredDiv = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 450px;
+  min-width: 950px;
+
+  @media (max-width: 950px) {
+    flex-direction: column;
+    min-width: 0;
+  }
 `;

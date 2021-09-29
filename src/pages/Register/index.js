@@ -2,11 +2,15 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 
-import { Container } from '../../styles/GlobalStyles';
+import { Link } from 'react-router-dom';
+import { CenteredDiv, Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import Loading from '../../components/Loading';
 import * as actions from '../../store/modules/auth/actions';
+import Svg from '../../assets/svg/codding.svg';
+import LeftArrow from '../../assets/svg/left-arrow.svg';
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -53,34 +57,83 @@ export default function Register() {
   };
 
   return (
-    <Container>
-      <Loading isLoading={isLoading} />
-      <h1>{id ? 'Editar dados' : 'Crie sua conta'}</h1>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Container>
+        <Loading isLoading={isLoading} />
+        <CenteredDiv>
+          <Form onSubmit={handleSubmit}>
+            <h1 style={{ color: '#fff' }}>
+              {id ? 'Editar dados' : 'Crie sua conta'}
+            </h1>
+            <input
+              type="text"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              placeholder="Nome"
+            />
 
-      <Form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          placeholder="Nome"
-        />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-mail"
+            />
 
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail"
-        />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Senha"
+            />
 
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Senha"
-        />
-
-        <button type="submit">{id ? 'Salvar' : 'Criar conta'}</button>
-      </Form>
-    </Container>
+            <button type="submit">{id ? 'Salvar' : 'CADASTRAR'}</button>
+          </Form>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignSelf: 'center',
+              width: '100%',
+              maxWidth: '480px',
+              paddingLeft: '20px',
+            }}
+          >
+            <img
+              src={Svg}
+              alt="Logo"
+              style={{ width: '70px', marginBottom: '60px' }}
+            />
+            <h1
+              style={{
+                maxWidth: '480px',
+                width: '480px',
+                height: '100%',
+                color: '#fff',
+                fontSize: '54px',
+                lineHeight: '64px',
+              }}
+            >
+              Cadastre sua conta e faça parte da comunidade
+            </h1>
+            <Link to="/">
+              <img
+                src={LeftArrow}
+                alt="Logo"
+                style={{
+                  width: '12px',
+                  marginTop: '10px',
+                  marginRight: '20px',
+                }}
+              />
+              Voltar para login
+            </Link>
+          </div>
+        </CenteredDiv>
+      </Container>
+    </motion.div>
   );
 }
