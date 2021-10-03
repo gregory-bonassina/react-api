@@ -90,7 +90,7 @@ export default function Register() {
               placeholder="Senha"
             />
 
-            <button type="submit">{id ? 'Salvar' : 'CADASTRAR'}</button>
+            <button type="submit">{id ? 'SALVAR' : 'CADASTRAR'}</button>
           </Form>
           <div
             style={{
@@ -117,7 +117,9 @@ export default function Register() {
                 lineHeight: '64px',
               }}
             >
-              Cadastre sua conta e faça parte da comunidade
+              {id
+                ? 'Edite sua conta e se mantenha atualizado'
+                : 'Cadastre sua conta e faça parte da comunidade'}
             </h1>
             <Link to="/">
               <img
@@ -129,7 +131,7 @@ export default function Register() {
                   marginRight: '20px',
                 }}
               />
-              Voltar para login
+              {id ? 'Voltar' : 'Voltar para login'}
             </Link>
           </div>
         </CenteredDiv>

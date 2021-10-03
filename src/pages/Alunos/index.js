@@ -16,6 +16,7 @@ import axios from '../../services/axios';
 
 import Loading from '../../components/Loading';
 import Header from '../../components/Header';
+import BurgerMenu from '../../components/BurgerMenu';
 
 export default function Alunos() {
   const activeUserId = useSelector((state) => state.auth.user.id);
@@ -65,6 +66,7 @@ export default function Alunos() {
 
   return (
     <Container>
+      <BurgerMenu />
       <Header />
       <Loading isLoading={isLoading} />
       <h1>Alunos</h1>
